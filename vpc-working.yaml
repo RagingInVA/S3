@@ -1,0 +1,51 @@
+# No Changes | Validated
+# 1
+# 10 Dec 2025
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: VPC-briish0678 in us-west-2 spanning at least three Availability Zones
+
+Resources:
+  VPCbriish0678:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: VPC-briish0678
+
+  PublicSubnetAz1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPCbriish0678
+      CidrBlock: 10.0.1.0/24
+      AvailabilityZone: !Select [0, !GetAZs 'us-west-2']
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: VPC-briish0678-public-subnet-az1
+
+  PublicSubnetAz2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPCbriish0678
+      CidrBlock: 10.0.2.0/24
+      AvailabilityZone: !Select [1, !GetAZs 'us-west-2']
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: VPC-briish0678-public-subnet-az2
+
+  PublicSubnetAz3:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPCbriish0678
+      CidrBlock: 10.0.3.0/24
+      AvailabilityZone: !Select [2, !GetAZs 'us-west-2']
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: VPC-briish0678-public-subnet-az3
+
